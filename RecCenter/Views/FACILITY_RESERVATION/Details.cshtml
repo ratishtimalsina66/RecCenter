@@ -1,0 +1,83 @@
+﻿@model RecCenter.FACILITY_RESERVATION
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FACILITY_RESERVATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Reservation_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reservation_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.End_Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.End_Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Purpose)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Purpose)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FACILITY.Facility_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FACILITY.Facility_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBER.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBER.First_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Reservation_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

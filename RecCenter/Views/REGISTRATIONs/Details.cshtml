@@ -1,0 +1,67 @@
+﻿@model RecCenter.REGISTRATION
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>REGISTRATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Registration_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Registration_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Attendance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attendance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CLASS_SCHEDULE.Day_Of_Week)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLASS_SCHEDULE.Day_Of_Week)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MEMBER.First_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MEMBER.First_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Registration_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

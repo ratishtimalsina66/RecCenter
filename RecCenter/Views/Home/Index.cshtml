@@ -1,0 +1,453 @@
+﻿@{
+    ViewBag.Title = "RecCenter Dashboard";
+}
+
+@section PageHeader {
+    <div class="rec-hero-card">
+        <div class="row">
+            <div class="col-md-8 hero-content">
+                <h1 class="hero-title">
+                    RecCenter Management
+                </h1>
+                <p class="hero-subtitle">
+                    Your centralized command center for members, facilities, and staff operations.
+                </p>
+                <div class="hero-actions">
+                    @Html.ActionLink("Manage Members", "Index", "MEMBERs", null, new { @class = "btn btn-light btn-cta" })
+                    @Html.ActionLink("View Classes", "Index", "CLASSes", null, new { @class = "btn btn-outline-light btn-cta" })
+                </div>
+            </div>
+            <div class="col-md-4 hidden-sm hidden-xs">
+                <div class="hero-image-container">
+                    <img src="~/Content/images/rec-hero.jpg" alt="RecCenter Hero" class="hero-img" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@* ===== MAIN CONTENT ===== *@
+<div class="row rec-main-row">
+    
+    <div class="col-md-8">
+        <div class="rec-section-header">
+            <h3><i class="glyphicon glyphicon-th-large"></i> Core Modules</h3>
+            <p>Access primary management tools.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <a href="@Url.Action("Index", "MEMBERs")" class="module-link">
+                    <div class="module-card">
+                        <div class="module-icon-circle accent-blue">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </div>
+                        <div class="module-text">
+                            <h4>Members</h4>
+                            <p>Profiles, history & status</p>
+                        </div>
+                        <div class="module-arrow"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <a href="@Url.Action("Index", "MEMBERSHIP_TYPE")" class="module-link">
+                    <div class="module-card">
+                        <div class="module-icon-circle accent-teal">
+                            <span class="glyphicon glyphicon-credit-card"></span>
+                        </div>
+                        <div class="module-text">
+                            <h4>Membership Types</h4>
+                            <p>Pricing tiers & duration</p>
+                        </div>
+                        <div class="module-arrow"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <a href="@Url.Action("Index", "CLASSes")" class="module-link">
+                    <div class="module-card">
+                        <div class="module-icon-circle accent-green">
+                            <span class="glyphicon glyphicon-education"></span>
+                        </div>
+                        <div class="module-text">
+                            <h4>Classes</h4>
+                            <p>Course catalog management</p>
+                        </div>
+                        <div class="module-arrow"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <a href="@Url.Action("Index", "CLASS_SCHEDULE")" class="module-link">
+                    <div class="module-card">
+                        <div class="module-icon-circle accent-orange">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                        <div class="module-text">
+                            <h4>Class Schedule</h4>
+                            <p>Timetables & instructors</p>
+                        </div>
+                        <div class="module-arrow"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <a href="@Url.Action("Index", "FACILITies")" class="module-link">
+                    <div class="module-card">
+                        <div class="module-icon-circle accent-rose">
+                            <span class="glyphicon glyphicon-home"></span>
+                        </div>
+                        <div class="module-text">
+                            <h4>Facilities</h4>
+                            <p>Rooms, courts & pools</p>
+                        </div>
+                        <div class="module-arrow"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <a href="@Url.Action("Index", "FACILITY_RESERVATION")" class="module-link">
+                    <div class="module-card">
+                        <div class="module-icon-circle accent-purple">
+                            <span class="glyphicon glyphicon-list-alt"></span>
+                        </div>
+                        <div class="module-text">
+                            <h4>Reservations</h4>
+                            <p>Booking logs & conflicts</p>
+                        </div>
+                        <div class="module-arrow"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <a href="@Url.Action("Index", "EQUIPMENTs")" class="module-link">
+                    <div class="module-card">
+                        <div class="module-icon-circle accent-slate">
+                            <span class="glyphicon glyphicon-wrench"></span>
+                        </div>
+                        <div class="module-text">
+                            <h4>Equipment</h4>
+                            <p>Inventory & maintenance</p>
+                        </div>
+                        <div class="module-arrow"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-sm-6 col-md-6">
+                <a href="@Url.Action("Index", "STAFFs")" class="module-link">
+                    <div class="module-card">
+                        <div class="module-icon-circle accent-indigo">
+                            <span class="glyphicon glyphicon-briefcase"></span>
+                        </div>
+                        <div class="module-text">
+                            <h4>Staff Directory</h4>
+                            <p>Admin & instructors</p>
+                        </div>
+                        <div class="module-arrow"><i class="glyphicon glyphicon-chevron-right"></i></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        
+        <div class="dashboard-panel">
+            <div class="panel-header">
+                <h5><i class="glyphicon glyphicon-stats"></i> Live Metrics</h5>
+            </div>
+            <div class="panel-body">
+                <div class="metric-list">
+                    <div class="metric-item">
+                        <div class="metric-label">Active Members</div>
+                        <div class="metric-value text-primary">245</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Classes This Week</div>
+                        <div class="metric-value text-success">18</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">Equipment Items</div>
+                        <div class="metric-value text-warning">132</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-label">New Bookings</div>
+                        <div class="metric-value text-danger">47</div>
+                    </div>
+                </div>
+                <div class="panel-footer-note">
+                    <i class="glyphicon glyphicon-refresh"></i> Data refreshes daily
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-panel">
+            <div class="panel-header">
+                <h5><i class="glyphicon glyphicon-picture"></i> Facility Highlights</h5>
+            </div>
+            <div class="panel-body no-padding">
+                <div class="gallery-grid">
+                    <img src="~/Content/images/rec-hero1.jpg" alt="Highlight 1" class="gallery-img">
+                    <img src="~/Content/images/rec-hero2.jpg" alt="Highlight 2" class="gallery-img">
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-panel info-panel">
+            <div class="panel-header">
+                <h5><i class="glyphicon glyphicon-info-sign"></i> Quick Tips</h5>
+            </div>
+            <div class="panel-body">
+                <ul class="tips-list">
+                    <li>Start in <strong>Members</strong> to create profiles before assigning memberships.</li>
+                    <li>Check <strong>Reservations</strong> daily for room conflicts.</li>
+                    <li>Use <strong>Registrations</strong> to monitor class popularity.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    /* ===== PAGE LAYOUT & TYPOGRAPHY ===== */
+    body {
+        background-color: #f3f4f6; /* Soft grey background */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .rec-main-row {
+        margin-top: 20px;
+    }
+
+    .rec-section-header {
+        margin-bottom: 15px;
+        padding-left: 5px;
+    }
+
+    .rec-section-header h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: #374151;
+    }
+
+    .rec-section-header p {
+        color: #6b7280;
+        font-size: 13px;
+        margin: 0;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .rec-hero-card {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        color: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+        margin-bottom: 25px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-title {
+        font-weight: 800;
+        font-size: 32px;
+        margin-top: 0;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+        color: #dbeafe;
+        margin-bottom: 20px;
+        max-width: 90%;
+    }
+
+    .hero-actions .btn-cta {
+        margin-right: 10px;
+        font-weight: 600;
+        border-radius: 6px;
+        padding: 8px 20px;
+        transition: transform 0.2s;
+    }
+
+    .hero-actions .btn-cta:hover {
+        transform: translateY(-2px);
+    }
+
+    .btn-light { background: white; color: #1e40af; border: none; }
+    .btn-outline-light { background: transparent; border: 2px solid rgba(255,255,255,0.3); color: white; }
+    .btn-outline-light:hover { background: rgba(255,255,255,0.1); border-color: white; color: white; }
+
+    .hero-image-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        transform: rotate(2deg);
+        border: 4px solid rgba(255,255,255,0.2);
+    }
+
+    /* ===== MODULE CARDS ===== */
+    .module-link {
+        text-decoration: none !important;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .module-card {
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        transition: all 0.2s ease-in-out;
+    }
+
+    .module-link:hover .module-card {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
+        border-color: #d1d5db;
+    }
+
+    .module-icon-circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    /* Icon Colors */
+    .accent-blue { background-color: #eff6ff; color: #2563eb; }
+    .accent-teal { background-color: #f0f9ff; color: #0ea5e9; }
+    .accent-green { background-color: #f0fdf4; color: #16a34a; }
+    .accent-orange { background-color: #fff7ed; color: #ea580c; }
+    .accent-rose { background-color: #fff1f2; color: #e11d48; }
+    .accent-purple { background-color: #faf5ff; color: #9333ea; }
+    .accent-slate { background-color: #f8fafc; color: #475569; }
+    .accent-indigo { background-color: #eef2ff; color: #4f46e5; }
+
+    .module-text h4 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #1f2937;
+    }
+
+    .module-text p {
+        margin: 2px 0 0;
+        font-size: 12px;
+        color: #6b7280;
+    }
+
+    .module-arrow {
+        margin-left: auto;
+        color: #d1d5db;
+        font-size: 12px;
+    }
+
+    /* ===== RIGHT SIDE PANELS ===== */
+    .dashboard-panel {
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    .panel-header {
+        padding: 12px 15px;
+        border-bottom: 1px solid #f3f4f6;
+        background-color: #f9fafb;
+    }
+
+    .panel-header h5 {
+        margin: 0;
+        font-weight: 700;
+        color: #4b5563;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .panel-body {
+        padding: 15px;
+    }
+    .panel-body.no-padding { padding: 0; }
+
+    /* Metric List */
+    .metric-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .metric-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed #e5e7eb;
+    }
+    .metric-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .metric-label { font-size: 13px; color: #4b5563; font-weight: 500; }
+    .metric-value { font-size: 16px; font-weight: 800; }
+
+    .panel-footer-note {
+        margin-top: 15px;
+        font-size: 11px;
+        color: #9ca3af;
+        text-align: center;
+        font-style: italic;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+        display: flex;
+    }
+    .gallery-img {
+        width: 50%;
+        height: 100px;
+        object-fit: cover;
+        transition: opacity 0.2s;
+    }
+    .gallery-img:hover { opacity: 0.9; }
+
+    /* Info Panel */
+    .info-panel { background: #eff6ff; border-color: #bfdbfe; }
+    .info-panel .panel-header { background: #dbeafe; border-bottom-color: #bfdbfe; }
+    .info-panel .panel-header h5 { color: #1e40af; }
+    
+    .tips-list {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 12px;
+        color: #1e3a8a;
+        line-height: 1.6;
+    }
+</style>

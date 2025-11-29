@@ -1,0 +1,178 @@
+﻿@model RecCenter.MEMBER
+
+@{
+    ViewBag.Title = "Create Member";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section PageHeader {
+    <div class="rc-card">
+        <h2 class="rc-card-title">Add New Member</h2>
+        <p>Enter member details, contact information, and membership type.</p>
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="rc-card">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.First_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", type = "email", placeholder = "user@example.com" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* PHONE with visible formatting/mask *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(
+                        model => model.Phone,
+                        new
+                        {
+                            @class = "form-control",
+                            type = "tel",
+                            placeholder = "(555) 123-4567",
+                            maxlength = "14",
+                            pattern = @"\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}",
+                            title = "Use format (555) 123-4567"
+                        })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* DOB as HTML5 date picker *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.Date_Of_Birth, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(
+                        model => model.Date_Of_Birth,
+                        "{0:yyyy-MM-dd}",
+                        new
+                        {
+                            @class = "form-control",
+                            type = "date"
+                        })
+                    @Html.ValidationMessageFor(model => model.Date_Of_Birth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Join_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(
+                        model => model.Join_Date,
+                        "{0:yyyy-MM-dd}",
+                        new
+                        {
+                            @class = "form-control",
+                            type = "date"
+                        })
+                    @Html.ValidationMessageFor(model => model.Join_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Membership_Type_ID, "Membership_Type_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Membership_Type_ID", null, "-- Select membership type --", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Membership_Type_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control", placeholder = "Active" } })
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* ZIP with numeric formatting/mask *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.ZIP_Code, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(
+                        model => model.ZIP_Code,
+                        new
+                        {
+                            @class = "form-control",
+                            placeholder = "43606",
+                            maxlength = "5",
+                            pattern = @"\d{5}",
+                            title = "Enter 5-digit ZIP code"
+                        })
+                    @Html.ValidationMessageFor(model => model.ZIP_Code, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Created_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Created_Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Created_Date, "", new { @class = "text-danger" })
+                    <span class="help-block" style="font-size:11px;">
+                        If left blank, the system will set this automatically.
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default", style = "margin-left:8px;" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

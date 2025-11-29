@@ -1,0 +1,805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="group8Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLASS">
+          <Key>
+            <PropertyRef Name="Class_ID" />
+          </Key>
+          <Property Name="Class_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Instructor_ID" Type="int" Nullable="false" />
+          <Property Name="Duration_Minutes" Type="int" Nullable="false" />
+          <Property Name="Max_Capacity" Type="int" Nullable="false" />
+          <Property Name="Difficulty_Level" Type="nvarchar" MaxLength="20" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CLASS_SCHEDULE">
+          <Key>
+            <PropertyRef Name="Schedule_ID" />
+          </Key>
+          <Property Name="Schedule_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_ID" Type="int" Nullable="false" />
+          <Property Name="Facility_ID" Type="int" Nullable="false" />
+          <Property Name="Day_Of_Week" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Start_Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="End_Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Start_Date" Type="date" Nullable="false" />
+          <Property Name="End_Date" Type="date" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EQUIPMENT">
+          <Key>
+            <PropertyRef Name="Equipment_ID" />
+          </Key>
+          <Property Name="Equipment_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Equipment_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Equipment_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Facility_ID" Type="int" Nullable="false" />
+          <Property Name="Purchase_Date" Type="date" />
+          <Property Name="Last_Maintenance" Type="date" />
+          <Property Name="Next_Maintenance" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Serial_Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FACILITY">
+          <Key>
+            <PropertyRef Name="Facility_ID" />
+          </Key>
+          <Property Name="Facility_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Facility_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Facility_Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+          <Property Name="Floor_Number" Type="int" />
+          <Property Name="Equipment_Available" Type="nvarchar(max)" />
+          <Property Name="Hourly_Rate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FACILITY_RESERVATION">
+          <Key>
+            <PropertyRef Name="Reservation_ID" />
+          </Key>
+          <Property Name="Reservation_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Facility_ID" Type="int" Nullable="false" />
+          <Property Name="Member_ID" Type="int" Nullable="false" />
+          <Property Name="Reservation_Date" Type="date" Nullable="false" />
+          <Property Name="Start_Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="End_Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Purpose" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="Member_ID" />
+          </Key>
+          <Property Name="Member_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Date_Of_Birth" Type="date" Nullable="false" />
+          <Property Name="Join_Date" Type="date" />
+          <Property Name="Membership_Type_ID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" />
+          <Property Name="ZIP_Code" Type="nvarchar" MaxLength="10" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MEMBERSHIP_TYPE">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Monthly_Fee" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Duration_Months" Type="int" />
+          <Property Name="Max_Classes" Type="int" />
+          <Property Name="Facility_Access" Type="bit" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="REGISTRATION">
+          <Key>
+            <PropertyRef Name="Registration_ID" />
+          </Key>
+          <Property Name="Registration_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Member_ID" Type="int" Nullable="false" />
+          <Property Name="Schedule_ID" Type="int" Nullable="false" />
+          <Property Name="Registration_Date" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Attendance" Type="bit" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="STAFF">
+          <Key>
+            <PropertyRef Name="Staff_ID" />
+          </Key>
+          <Property Name="Staff_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Hire_Date" Type="date" Nullable="false" />
+          <Property Name="Certification" Type="nvarchar" MaxLength="100" />
+          <Property Name="Hourly_Rate" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Created_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__CLASS__Instructo__2D27B809">
+          <End Role="STAFF" Type="Self.STAFF" Multiplicity="1" />
+          <End Role="CLASS" Type="Self.CLASS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STAFF">
+              <PropertyRef Name="Staff_ID" />
+            </Principal>
+            <Dependent Role="CLASS">
+              <PropertyRef Name="Instructor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLASS_SCH__Class__31EC6D26">
+          <End Role="CLASS" Type="Self.CLASS" Multiplicity="1" />
+          <End Role="CLASS_SCHEDULE" Type="Self.CLASS_SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASS">
+              <PropertyRef Name="Class_ID" />
+            </Principal>
+            <Dependent Role="CLASS_SCHEDULE">
+              <PropertyRef Name="Class_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLASS_SCH__Facil__32E0915F">
+          <End Role="FACILITY" Type="Self.FACILITY" Multiplicity="1" />
+          <End Role="CLASS_SCHEDULE" Type="Self.CLASS_SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY">
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="CLASS_SCHEDULE">
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EQUIPMENT__Facil__48CFD27E">
+          <End Role="FACILITY" Type="Self.FACILITY" Multiplicity="1" />
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY">
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="EQUIPMENT">
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACILITY___Facil__412EB0B6">
+          <End Role="FACILITY" Type="Self.FACILITY" Multiplicity="1" />
+          <End Role="FACILITY_RESERVATION" Type="Self.FACILITY_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY">
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="FACILITY_RESERVATION">
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACILITY___Membe__4222D4EF">
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+          <End Role="FACILITY_RESERVATION" Type="Self.FACILITY_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER">
+              <PropertyRef Name="Member_ID" />
+            </Principal>
+            <Dependent Role="FACILITY_RESERVATION">
+              <PropertyRef Name="Member_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MEMBER__Membersh__1DE57479">
+          <End Role="MEMBERSHIP_TYPE" Type="Self.MEMBERSHIP_TYPE" Multiplicity="1" />
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBERSHIP_TYPE">
+              <PropertyRef Name="Type_ID" />
+            </Principal>
+            <Dependent Role="MEMBER">
+              <PropertyRef Name="Membership_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTRAT__Membe__3A81B327">
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+          <End Role="REGISTRATION" Type="Self.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER">
+              <PropertyRef Name="Member_ID" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="Member_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTRAT__Sched__3B75D760">
+          <End Role="CLASS_SCHEDULE" Type="Self.CLASS_SCHEDULE" Multiplicity="1" />
+          <End Role="REGISTRATION" Type="Self.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASS_SCHEDULE">
+              <PropertyRef Name="Schedule_ID" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="Schedule_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="group8ModelStoreContainer">
+          <EntitySet Name="CLASS" EntityType="Self.CLASS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLASS_SCHEDULE" EntityType="Self.CLASS_SCHEDULE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EQUIPMENT" EntityType="Self.EQUIPMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACILITY" EntityType="Self.FACILITY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACILITY_RESERVATION" EntityType="Self.FACILITY_RESERVATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEMBER" EntityType="Self.MEMBER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MEMBERSHIP_TYPE" EntityType="Self.MEMBERSHIP_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REGISTRATION" EntityType="Self.REGISTRATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STAFF" EntityType="Self.STAFF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CLASS__Instructo__2D27B809" Association="Self.FK__CLASS__Instructo__2D27B809">
+            <End Role="STAFF" EntitySet="STAFF" />
+            <End Role="CLASS" EntitySet="CLASS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLASS_SCH__Class__31EC6D26" Association="Self.FK__CLASS_SCH__Class__31EC6D26">
+            <End Role="CLASS" EntitySet="CLASS" />
+            <End Role="CLASS_SCHEDULE" EntitySet="CLASS_SCHEDULE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLASS_SCH__Facil__32E0915F" Association="Self.FK__CLASS_SCH__Facil__32E0915F">
+            <End Role="FACILITY" EntitySet="FACILITY" />
+            <End Role="CLASS_SCHEDULE" EntitySet="CLASS_SCHEDULE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EQUIPMENT__Facil__48CFD27E" Association="Self.FK__EQUIPMENT__Facil__48CFD27E">
+            <End Role="FACILITY" EntitySet="FACILITY" />
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACILITY___Facil__412EB0B6" Association="Self.FK__FACILITY___Facil__412EB0B6">
+            <End Role="FACILITY" EntitySet="FACILITY" />
+            <End Role="FACILITY_RESERVATION" EntitySet="FACILITY_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACILITY___Membe__4222D4EF" Association="Self.FK__FACILITY___Membe__4222D4EF">
+            <End Role="MEMBER" EntitySet="MEMBER" />
+            <End Role="FACILITY_RESERVATION" EntitySet="FACILITY_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MEMBER__Membersh__1DE57479" Association="Self.FK__MEMBER__Membersh__1DE57479">
+            <End Role="MEMBERSHIP_TYPE" EntitySet="MEMBERSHIP_TYPE" />
+            <End Role="MEMBER" EntitySet="MEMBER" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTRAT__Membe__3A81B327" Association="Self.FK__REGISTRAT__Membe__3A81B327">
+            <End Role="MEMBER" EntitySet="MEMBER" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTRAT__Sched__3B75D760" Association="Self.FK__REGISTRAT__Sched__3B75D760">
+            <End Role="CLASS_SCHEDULE" EntitySet="CLASS_SCHEDULE" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="group8Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLASS">
+          <Key>
+            <PropertyRef Name="Class_ID" />
+          </Key>
+          <Property Name="Class_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Instructor_ID" Type="Int32" Nullable="false" />
+          <Property Name="Duration_Minutes" Type="Int32" Nullable="false" />
+          <Property Name="Max_Capacity" Type="Int32" Nullable="false" />
+          <Property Name="Difficulty_Level" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="STAFF" Relationship="Self.FK__CLASS__Instructo__2D27B809" FromRole="CLASS" ToRole="STAFF" />
+          <NavigationProperty Name="CLASS_SCHEDULE" Relationship="Self.FK__CLASS_SCH__Class__31EC6D26" FromRole="CLASS" ToRole="CLASS_SCHEDULE" />
+        </EntityType>
+        <EntityType Name="CLASS_SCHEDULE">
+          <Key>
+            <PropertyRef Name="Schedule_ID" />
+          </Key>
+          <Property Name="Schedule_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_ID" Type="Int32" Nullable="false" />
+          <Property Name="Facility_ID" Type="Int32" Nullable="false" />
+          <Property Name="Day_Of_Week" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Start_Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="End_Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Start_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Precision="0" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CLASS" Relationship="Self.FK__CLASS_SCH__Class__31EC6D26" FromRole="CLASS_SCHEDULE" ToRole="CLASS" />
+          <NavigationProperty Name="FACILITY" Relationship="Self.FK__CLASS_SCH__Facil__32E0915F" FromRole="CLASS_SCHEDULE" ToRole="FACILITY" />
+          <NavigationProperty Name="REGISTRATIONs" Relationship="Self.FK__REGISTRAT__Sched__3B75D760" FromRole="CLASS_SCHEDULE" ToRole="REGISTRATION" />
+        </EntityType>
+        <EntityType Name="EQUIPMENT">
+          <Key>
+            <PropertyRef Name="Equipment_ID" />
+          </Key>
+          <Property Name="Equipment_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Equipment_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Equipment_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Facility_ID" Type="Int32" Nullable="false" />
+          <Property Name="Purchase_Date" Type="DateTime" Precision="0" />
+          <Property Name="Last_Maintenance" Type="DateTime" Precision="0" />
+          <Property Name="Next_Maintenance" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Serial_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FACILITY" Relationship="Self.FK__EQUIPMENT__Facil__48CFD27E" FromRole="EQUIPMENT" ToRole="FACILITY" />
+        </EntityType>
+        <EntityType Name="FACILITY">
+          <Key>
+            <PropertyRef Name="Facility_ID" />
+          </Key>
+          <Property Name="Facility_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Facility_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Facility_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <Property Name="Floor_Number" Type="Int32" />
+          <Property Name="Equipment_Available" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hourly_Rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CLASS_SCHEDULE" Relationship="Self.FK__CLASS_SCH__Facil__32E0915F" FromRole="FACILITY" ToRole="CLASS_SCHEDULE" />
+          <NavigationProperty Name="EQUIPMENTs" Relationship="Self.FK__EQUIPMENT__Facil__48CFD27E" FromRole="FACILITY" ToRole="EQUIPMENT" />
+          <NavigationProperty Name="FACILITY_RESERVATION" Relationship="Self.FK__FACILITY___Facil__412EB0B6" FromRole="FACILITY" ToRole="FACILITY_RESERVATION" />
+        </EntityType>
+        <EntityType Name="FACILITY_RESERVATION">
+          <Key>
+            <PropertyRef Name="Reservation_ID" />
+          </Key>
+          <Property Name="Reservation_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Facility_ID" Type="Int32" Nullable="false" />
+          <Property Name="Member_ID" Type="Int32" Nullable="false" />
+          <Property Name="Reservation_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Start_Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="End_Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Purpose" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FACILITY" Relationship="Self.FK__FACILITY___Facil__412EB0B6" FromRole="FACILITY_RESERVATION" ToRole="FACILITY" />
+          <NavigationProperty Name="MEMBER" Relationship="Self.FK__FACILITY___Membe__4222D4EF" FromRole="FACILITY_RESERVATION" ToRole="MEMBER" />
+        </EntityType>
+        <EntityType Name="MEMBER">
+          <Key>
+            <PropertyRef Name="Member_ID" />
+          </Key>
+          <Property Name="Member_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Of_Birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Join_Date" Type="DateTime" Precision="0" />
+          <Property Name="Membership_Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="ZIP_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FACILITY_RESERVATION" Relationship="Self.FK__FACILITY___Membe__4222D4EF" FromRole="MEMBER" ToRole="FACILITY_RESERVATION" />
+          <NavigationProperty Name="MEMBERSHIP_TYPE" Relationship="Self.FK__MEMBER__Membersh__1DE57479" FromRole="MEMBER" ToRole="MEMBERSHIP_TYPE" />
+          <NavigationProperty Name="REGISTRATIONs" Relationship="Self.FK__REGISTRAT__Membe__3A81B327" FromRole="MEMBER" ToRole="REGISTRATION" />
+        </EntityType>
+        <EntityType Name="MEMBERSHIP_TYPE">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Monthly_Fee" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Duration_Months" Type="Int32" />
+          <Property Name="Max_Classes" Type="Int32" />
+          <Property Name="Facility_Access" Type="Boolean" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="MEMBERs" Relationship="Self.FK__MEMBER__Membersh__1DE57479" FromRole="MEMBERSHIP_TYPE" ToRole="MEMBER" />
+        </EntityType>
+        <EntityType Name="REGISTRATION">
+          <Key>
+            <PropertyRef Name="Registration_ID" />
+          </Key>
+          <Property Name="Registration_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Member_ID" Type="Int32" Nullable="false" />
+          <Property Name="Schedule_ID" Type="Int32" Nullable="false" />
+          <Property Name="Registration_Date" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Attendance" Type="Boolean" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CLASS_SCHEDULE" Relationship="Self.FK__REGISTRAT__Sched__3B75D760" FromRole="REGISTRATION" ToRole="CLASS_SCHEDULE" />
+          <NavigationProperty Name="MEMBER" Relationship="Self.FK__REGISTRAT__Membe__3A81B327" FromRole="REGISTRATION" ToRole="MEMBER" />
+        </EntityType>
+        <EntityType Name="STAFF">
+          <Key>
+            <PropertyRef Name="Staff_ID" />
+          </Key>
+          <Property Name="Staff_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Hire_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Certification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Hourly_Rate" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Created_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="CLASSes" Relationship="Self.FK__CLASS__Instructo__2D27B809" FromRole="STAFF" ToRole="CLASS" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__CLASS__Instructo__2D27B809">
+          <End Role="STAFF" Type="Self.STAFF" Multiplicity="1" />
+          <End Role="CLASS" Type="Self.CLASS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STAFF">
+              <PropertyRef Name="Staff_ID" />
+            </Principal>
+            <Dependent Role="CLASS">
+              <PropertyRef Name="Instructor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLASS_SCH__Class__31EC6D26">
+          <End Role="CLASS" Type="Self.CLASS" Multiplicity="1" />
+          <End Role="CLASS_SCHEDULE" Type="Self.CLASS_SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASS">
+              <PropertyRef Name="Class_ID" />
+            </Principal>
+            <Dependent Role="CLASS_SCHEDULE">
+              <PropertyRef Name="Class_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLASS_SCH__Facil__32E0915F">
+          <End Role="FACILITY" Type="Self.FACILITY" Multiplicity="1" />
+          <End Role="CLASS_SCHEDULE" Type="Self.CLASS_SCHEDULE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY">
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="CLASS_SCHEDULE">
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTRAT__Sched__3B75D760">
+          <End Role="CLASS_SCHEDULE" Type="Self.CLASS_SCHEDULE" Multiplicity="1" />
+          <End Role="REGISTRATION" Type="Self.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLASS_SCHEDULE">
+              <PropertyRef Name="Schedule_ID" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="Schedule_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EQUIPMENT__Facil__48CFD27E">
+          <End Role="FACILITY" Type="Self.FACILITY" Multiplicity="1" />
+          <End Role="EQUIPMENT" Type="Self.EQUIPMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY">
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="EQUIPMENT">
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACILITY___Facil__412EB0B6">
+          <End Role="FACILITY" Type="Self.FACILITY" Multiplicity="1" />
+          <End Role="FACILITY_RESERVATION" Type="Self.FACILITY_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FACILITY">
+              <PropertyRef Name="Facility_ID" />
+            </Principal>
+            <Dependent Role="FACILITY_RESERVATION">
+              <PropertyRef Name="Facility_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FACILITY___Membe__4222D4EF">
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+          <End Role="FACILITY_RESERVATION" Type="Self.FACILITY_RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER">
+              <PropertyRef Name="Member_ID" />
+            </Principal>
+            <Dependent Role="FACILITY_RESERVATION">
+              <PropertyRef Name="Member_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MEMBER__Membersh__1DE57479">
+          <End Role="MEMBERSHIP_TYPE" Type="Self.MEMBERSHIP_TYPE" Multiplicity="1" />
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBERSHIP_TYPE">
+              <PropertyRef Name="Type_ID" />
+            </Principal>
+            <Dependent Role="MEMBER">
+              <PropertyRef Name="Membership_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REGISTRAT__Membe__3A81B327">
+          <End Role="MEMBER" Type="Self.MEMBER" Multiplicity="1" />
+          <End Role="REGISTRATION" Type="Self.REGISTRATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MEMBER">
+              <PropertyRef Name="Member_ID" />
+            </Principal>
+            <Dependent Role="REGISTRATION">
+              <PropertyRef Name="Member_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="group8Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLASSes" EntityType="Self.CLASS" />
+          <EntitySet Name="CLASS_SCHEDULE" EntityType="Self.CLASS_SCHEDULE" />
+          <EntitySet Name="EQUIPMENTs" EntityType="Self.EQUIPMENT" />
+          <EntitySet Name="FACILITies" EntityType="Self.FACILITY" />
+          <EntitySet Name="FACILITY_RESERVATION" EntityType="Self.FACILITY_RESERVATION" />
+          <EntitySet Name="MEMBERs" EntityType="Self.MEMBER" />
+          <EntitySet Name="MEMBERSHIP_TYPE" EntityType="Self.MEMBERSHIP_TYPE" />
+          <EntitySet Name="REGISTRATIONs" EntityType="Self.REGISTRATION" />
+          <EntitySet Name="STAFFs" EntityType="Self.STAFF" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK__CLASS__Instructo__2D27B809" Association="Self.FK__CLASS__Instructo__2D27B809">
+            <End Role="STAFF" EntitySet="STAFFs" />
+            <End Role="CLASS" EntitySet="CLASSes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLASS_SCH__Class__31EC6D26" Association="Self.FK__CLASS_SCH__Class__31EC6D26">
+            <End Role="CLASS" EntitySet="CLASSes" />
+            <End Role="CLASS_SCHEDULE" EntitySet="CLASS_SCHEDULE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLASS_SCH__Facil__32E0915F" Association="Self.FK__CLASS_SCH__Facil__32E0915F">
+            <End Role="FACILITY" EntitySet="FACILITies" />
+            <End Role="CLASS_SCHEDULE" EntitySet="CLASS_SCHEDULE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTRAT__Sched__3B75D760" Association="Self.FK__REGISTRAT__Sched__3B75D760">
+            <End Role="CLASS_SCHEDULE" EntitySet="CLASS_SCHEDULE" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EQUIPMENT__Facil__48CFD27E" Association="Self.FK__EQUIPMENT__Facil__48CFD27E">
+            <End Role="FACILITY" EntitySet="FACILITies" />
+            <End Role="EQUIPMENT" EntitySet="EQUIPMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACILITY___Facil__412EB0B6" Association="Self.FK__FACILITY___Facil__412EB0B6">
+            <End Role="FACILITY" EntitySet="FACILITies" />
+            <End Role="FACILITY_RESERVATION" EntitySet="FACILITY_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FACILITY___Membe__4222D4EF" Association="Self.FK__FACILITY___Membe__4222D4EF">
+            <End Role="MEMBER" EntitySet="MEMBERs" />
+            <End Role="FACILITY_RESERVATION" EntitySet="FACILITY_RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MEMBER__Membersh__1DE57479" Association="Self.FK__MEMBER__Membersh__1DE57479">
+            <End Role="MEMBERSHIP_TYPE" EntitySet="MEMBERSHIP_TYPE" />
+            <End Role="MEMBER" EntitySet="MEMBERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REGISTRAT__Membe__3A81B327" Association="Self.FK__REGISTRAT__Membe__3A81B327">
+            <End Role="MEMBER" EntitySet="MEMBERs" />
+            <End Role="REGISTRATION" EntitySet="REGISTRATIONs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="group8ModelStoreContainer" CdmEntityContainer="group8Entities">
+          <EntitySetMapping Name="CLASSes">
+            <EntityTypeMapping TypeName="group8Model.CLASS">
+              <MappingFragment StoreEntitySet="CLASS">
+                <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
+                <ScalarProperty Name="Class_Name" ColumnName="Class_Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Instructor_ID" ColumnName="Instructor_ID" />
+                <ScalarProperty Name="Duration_Minutes" ColumnName="Duration_Minutes" />
+                <ScalarProperty Name="Max_Capacity" ColumnName="Max_Capacity" />
+                <ScalarProperty Name="Difficulty_Level" ColumnName="Difficulty_Level" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLASS_SCHEDULE">
+            <EntityTypeMapping TypeName="group8Model.CLASS_SCHEDULE">
+              <MappingFragment StoreEntitySet="CLASS_SCHEDULE">
+                <ScalarProperty Name="Schedule_ID" ColumnName="Schedule_ID" />
+                <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
+                <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+                <ScalarProperty Name="Day_Of_Week" ColumnName="Day_Of_Week" />
+                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+                <ScalarProperty Name="End_Time" ColumnName="End_Time" />
+                <ScalarProperty Name="Start_Date" ColumnName="Start_Date" />
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EQUIPMENTs">
+            <EntityTypeMapping TypeName="group8Model.EQUIPMENT">
+              <MappingFragment StoreEntitySet="EQUIPMENT">
+                <ScalarProperty Name="Equipment_ID" ColumnName="Equipment_ID" />
+                <ScalarProperty Name="Equipment_Name" ColumnName="Equipment_Name" />
+                <ScalarProperty Name="Equipment_Type" ColumnName="Equipment_Type" />
+                <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+                <ScalarProperty Name="Purchase_Date" ColumnName="Purchase_Date" />
+                <ScalarProperty Name="Last_Maintenance" ColumnName="Last_Maintenance" />
+                <ScalarProperty Name="Next_Maintenance" ColumnName="Next_Maintenance" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Serial_Number" ColumnName="Serial_Number" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACILITies">
+            <EntityTypeMapping TypeName="group8Model.FACILITY">
+              <MappingFragment StoreEntitySet="FACILITY">
+                <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+                <ScalarProperty Name="Facility_Name" ColumnName="Facility_Name" />
+                <ScalarProperty Name="Facility_Type" ColumnName="Facility_Type" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Floor_Number" ColumnName="Floor_Number" />
+                <ScalarProperty Name="Equipment_Available" ColumnName="Equipment_Available" />
+                <ScalarProperty Name="Hourly_Rate" ColumnName="Hourly_Rate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACILITY_RESERVATION">
+            <EntityTypeMapping TypeName="group8Model.FACILITY_RESERVATION">
+              <MappingFragment StoreEntitySet="FACILITY_RESERVATION">
+                <ScalarProperty Name="Reservation_ID" ColumnName="Reservation_ID" />
+                <ScalarProperty Name="Facility_ID" ColumnName="Facility_ID" />
+                <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+                <ScalarProperty Name="Reservation_Date" ColumnName="Reservation_Date" />
+                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+                <ScalarProperty Name="End_Time" ColumnName="End_Time" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBERs">
+            <EntityTypeMapping TypeName="group8Model.MEMBER">
+              <MappingFragment StoreEntitySet="MEMBER">
+                <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Date_Of_Birth" ColumnName="Date_Of_Birth" />
+                <ScalarProperty Name="Join_Date" ColumnName="Join_Date" />
+                <ScalarProperty Name="Membership_Type_ID" ColumnName="Membership_Type_ID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZIP_Code" ColumnName="ZIP_Code" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MEMBERSHIP_TYPE">
+            <EntityTypeMapping TypeName="group8Model.MEMBERSHIP_TYPE">
+              <MappingFragment StoreEntitySet="MEMBERSHIP_TYPE">
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+                <ScalarProperty Name="Type_Name" ColumnName="Type_Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Monthly_Fee" ColumnName="Monthly_Fee" />
+                <ScalarProperty Name="Duration_Months" ColumnName="Duration_Months" />
+                <ScalarProperty Name="Max_Classes" ColumnName="Max_Classes" />
+                <ScalarProperty Name="Facility_Access" ColumnName="Facility_Access" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGISTRATIONs">
+            <EntityTypeMapping TypeName="group8Model.REGISTRATION">
+              <MappingFragment StoreEntitySet="REGISTRATION">
+                <ScalarProperty Name="Registration_ID" ColumnName="Registration_ID" />
+                <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+                <ScalarProperty Name="Schedule_ID" ColumnName="Schedule_ID" />
+                <ScalarProperty Name="Registration_Date" ColumnName="Registration_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Attendance" ColumnName="Attendance" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STAFFs">
+            <EntityTypeMapping TypeName="group8Model.STAFF">
+              <MappingFragment StoreEntitySet="STAFF">
+                <ScalarProperty Name="Staff_ID" ColumnName="Staff_ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Hire_Date" ColumnName="Hire_Date" />
+                <ScalarProperty Name="Certification" ColumnName="Certification" />
+                <ScalarProperty Name="Hourly_Rate" ColumnName="Hourly_Rate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Created_Date" ColumnName="Created_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="group8Model.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

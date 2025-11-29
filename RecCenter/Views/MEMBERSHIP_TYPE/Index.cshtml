@@ -1,0 +1,141 @@
+﻿@model IEnumerable<RecCenter.MEMBERSHIP_TYPE>
+
+@{
+    ViewBag.Title = "Membership Types";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="rec-page-header">
+    <div class="rec-page-title">
+        <h2>Membership Types</h2>
+        <p class="rec-page-subtitle">
+            Manage the different membership plans, pricing, duration and facility access options
+            offered by the RecCenter.
+        </p>
+    </div>
+    <div>
+        @Html.ActionLink(
+            "Create New Membership Type",
+            "Create",
+            null,
+            new { @class = "btn btn-primary rec-create-btn" }
+        )
+    </div>
+</div>
+
+<div class="rec-card">
+    <table class="table table-hover table-condensed rec-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Type_Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th class="text-right">@Html.DisplayNameFor(model => model.Monthly_Fee)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Duration_Months)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Max_Classes)</th>
+                <th class="text-center">@Html.DisplayNameFor(model => model.Facility_Access)</th>
+                <th>@Html.DisplayNameFor(model => model.Created_Date)</th>
+                <th class="text-right">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(m => item.Type_Name)</td>
+                <td>@Html.DisplayFor(m => item.Description)</td>
+                <td class="text-right">
+                    @String.Format("{0:C}", item.Monthly_Fee)
+                </td>
+                <td class="text-center">@Html.DisplayFor(m => item.Duration_Months)</td>
+                <td class="text-center">@Html.DisplayFor(m => item.Max_Classes)</td>
+                <td class="text-center">
+                    @if (item.Facility_Access == true)
+                    {
+                        <span class="label label-success">Yes</span>
+                    }
+                    else if (item.Facility_Access == false)
+                    {
+                        <span class="label label-default">No</span>
+                    }
+                    else
+                    {
+                        <span class="label label-warning">N/A</span>
+                    }
+                </td>
+
+                <td>@Html.DisplayFor(m => item.Created_Date)</td>
+                <td class="text-right">
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Type_ID }, new { @class = "btn btn-xs btn-link" })
+                    @Html.Raw("|")
+                    @Html.ActionLink("Details", "Details", new { id = item.Type_ID }, new { @class = "btn btn-xs btn-link" })
+                    @Html.Raw("|")
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Type_ID }, new { @class = "btn btn-xs btn-link text-danger" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .rec-page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 12px;
+        margin-bottom: 10px;
+    }
+
+    .rec-page-title h2 {
+        margin: 0;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .rec-page-subtitle {
+        margin: 2px 0 0 0;
+        font-size: 12px;
+        color: #6b7280;
+    }
+
+    .rec-create-btn {
+        font-size: 13px;
+        padding: 6px 14px;
+        font-weight: 600;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(15,23,42,0.18);
+    }
+
+    .rec-card {
+        background: #ffffff;
+        padding: 14px 16px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(15,23,42,0.08);
+    }
+
+    .rec-table > thead > tr > th {
+        border-bottom: 2px solid #e5e7eb;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #6b7280;
+        white-space: nowrap;
+    }
+
+    .rec-table > tbody > tr > td {
+        vertical-align: middle;
+        font-size: 13px;
+    }
+
+    .rec-table > tbody > tr:hover {
+        background-color: #f9fafb;
+    }
+
+    .label-success {
+        background-color: #22c55e;
+    }
+
+    .label-default {
+        background-color: #9ca3af;
+    }
+</style>

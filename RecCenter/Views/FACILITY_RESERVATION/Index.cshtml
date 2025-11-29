@@ -1,0 +1,69 @@
+﻿@model IEnumerable<RecCenter.FACILITY_RESERVATION>
+
+@{
+    ViewBag.Title = "Facility Reservations";
+}
+
+@section PageHeader {
+    <div class="rc-card">
+        <h2 class="rc-card-title">Facility Reservations</h2>
+        <p>View and manage bookings for RecCenter facilities.</p>
+    </div>
+}
+
+<p>
+    @Html.ActionLink(
+        "Create New Reservation",
+        "Create",
+        null,
+        new { @class = "btn btn-primary" }
+    )
+</p>
+
+<div class="rc-card">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Reservation_Date)</th>
+                <th>@Html.DisplayNameFor(model => model.Start_Time)</th>
+                <th>@Html.DisplayNameFor(model => model.End_Time)</th>
+                <th>Duration (minutes)</th> @* CALCULATED FIELD *@
+                <th>@Html.DisplayNameFor(model => model.Purpose)</th>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>@Html.DisplayNameFor(model => model.Created_Date)</th>
+                <th>@Html.DisplayNameFor(model => model.FACILITY.Facility_Name)</th>
+                <th>@Html.DisplayNameFor(model => model.MEMBER.First_Name)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Reservation_Date.ToShortDateString()</td>
+                    <td>@item.Start_Time</td>
+                    <td>@item.End_Time</td>
+
+                    @* CALCULATED: End_Time - Start_Time (not stored in database) *@
+                    <td>
+                        @{
+                            var duration = item.End_Time - item.Start_Time;
+                        }
+                        @duration.TotalMinutes
+                    </td>
+
+                    <td>@item.Purpose</td>
+                    <td>@item.Status</td>
+                    <td>@item.Created_Date</td>
+                    <td>@item.FACILITY.Facility_Name</td>
+                    <td>@(item.MEMBER.First_Name + " " + item.MEMBER.Last_Name)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Reservation_ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Reservation_ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Reservation_ID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

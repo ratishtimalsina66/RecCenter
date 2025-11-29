@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<div class="about-container">
+    <h2 class="text-center">About Our RecCenter Project</h2>
+
+    <p class="about-text">
+        This Recreation Center Management System was developed as a group project by a team of six students.
+        The system is designed to manage members, memberships, classes, facilities, reservations, equipment,
+        and staff through a centralized web-based application.
+    </p>
+
+    <p class="about-text">
+        <strong>My Role:</strong> I was responsible for designing and implementing all database input forms,
+        including Create, Edit, Delete, and navigation features for each core entity. I also implemented foreign
+        key dropdowns, record navigation, input validation, and the calculated membership fields used in the system.
+    </p>
+
+    <h3 class="text-center mt-4">Our Team</h3>
+
+    <div class="team-grid">
+        <!-- CARD 1 -->
+        <div class="team-card">
+            <div class="card-inner">
+                <div class="card-front">Ratish Timalsina</div>
+                <div class="card-back">Forms & UI Developer</div>
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="team-card">
+            <div class="card-inner">
+                <div class="card-front">Kevin law</div>
+                <div class="card-back">Database & ER Diagram</div>
+            </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="team-card">
+            <div class="card-inner">
+                <div class="card-front">Emy</div>
+                <div class="card-back">Reports & SQL Queries</div>
+            </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="team-card">
+            <div class="card-inner">
+                <div class="card-front">Member 4</div>
+                <div class="card-back">Stored Procedures</div>
+            </div>
+        </div>
+
+        <!-- CARD 5 -->
+        <div class="team-card">
+            <div class="card-inner">
+                <div class="card-front">Member 5</div>
+                <div class="card-back">Testing & Documentation</div>
+            </div>
+        </div>
+
+        <!-- CARD 6 -->
+        <div class="team-card">
+            <div class="card-inner">
+                <div class="card-front">Member 6</div>
+                <div class="card-back">Deployment & Presentation</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .about-container {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .about-text {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .team-card {
+        perspective: 1000px;
+    }
+
+    .card-inner {
+        width: 100%;
+        height: 120px;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+    }
+
+    .team-card:hover .card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 12px;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .card-front {
+        background: linear-gradient(135deg, #1d4ed8, #2563eb);
+        color: white;
+    }
+
+    .card-back {
+        background: #facc15;
+        color: #1f2933;
+        transform: rotateY(180deg);
+        font-size: 14px;
+        padding: 10px;
+        text-align: center;
+    }
+</style>

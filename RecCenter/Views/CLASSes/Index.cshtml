@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RecCenter.CLASS>
+
+@{
+    // Correct the title so the browser/tab shows "Classes"
+    ViewBag.Title = "Classes";
+}
+
+@section PageHeader {
+    <div class="rc-card">
+        <h2 class="rc-card-title">Classes</h2>
+        <p>Browse and manage RecCenter classes and their assigned instructors.</p>
+    </div>
+}
+
+<p>
+    @Html.ActionLink(
+        "Create New Class",
+        "Create",
+        null,
+        new { @class = "btn btn-primary" }
+    )
+</p>
+
+<div class="rc-card">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Class_Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Duration_Minutes)</th>
+                <th>@Html.DisplayNameFor(model => model.Max_Capacity)</th>
+                <th>@Html.DisplayNameFor(model => model.Difficulty_Level)</th>
+                <th>@Html.DisplayNameFor(model => model.Category)</th>
+                <th>@Html.DisplayNameFor(model => model.Created_Date)</th>
+                <th>@Html.DisplayNameFor(model => model.STAFF.First_Name)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Class_Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Duration_Minutes)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Max_Capacity)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Difficulty_Level)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Category)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Created_Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.STAFF.First_Name)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Class_ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Class_ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Class_ID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

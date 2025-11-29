@@ -1,0 +1,61 @@
+﻿@model IEnumerable<RecCenter.EQUIPMENT>
+
+@{
+    ViewBag.Title = "Equipment";
+}
+
+@section PageHeader {
+    <div class="rc-card">
+        <h2 class="rc-card-title">Equipment Inventory</h2>
+        <p>Track all RecCenter equipment, maintenance dates, and facility locations.</p>
+    </div>
+}
+
+<p>
+    @Html.ActionLink(
+        "Add New Equipment",
+        "Create",
+        null,
+        new { @class = "btn btn-primary" }
+    )
+</p>
+
+<div class="rc-card">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Equipment_Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Equipment_Type)</th>
+                <th>@Html.DisplayNameFor(model => model.Purchase_Date)</th>
+                <th>@Html.DisplayNameFor(model => model.Last_Maintenance)</th>
+                <th>@Html.DisplayNameFor(model => model.Next_Maintenance)</th>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>@Html.DisplayNameFor(model => model.Serial_Number)</th>
+                <th>@Html.DisplayNameFor(model => model.Created_Date)</th>
+                <th>@Html.DisplayNameFor(model => model.FACILITY.Facility_Name)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Equipment_Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Equipment_Type)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Purchase_Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Last_Maintenance)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Next_Maintenance)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Serial_Number)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Created_Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FACILITY.Facility_Name)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Equipment_ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Equipment_ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Equipment_ID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

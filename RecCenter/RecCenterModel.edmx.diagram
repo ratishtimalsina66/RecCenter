@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b07136d5ad3c42ff95e5dda2268945e6" Name="Diagram1" ZoomLevel="47">
+        <EntityTypeShape EntityType="group8Model.CLASS" Width="1.5" PointX="3.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.CLASS_SCHEDULE" Width="1.5" PointX="6" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.EQUIPMENT" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.FACILITY" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.FACILITY_RESERVATION" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.MEMBER" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.MEMBERSHIP_TYPE" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.REGISTRATION" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.STAFF" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="group8Model.sysdiagram" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="group8Model.FK__CLASS__Instructo__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="group8Model.FK__CLASS_SCH__Class__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="group8Model.FK__CLASS_SCH__Facil__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="group8Model.FK__REGISTRAT__Sched__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="group8Model.FK__EQUIPMENT__Facil__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="group8Model.FK__FACILITY___Facil__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="group8Model.FK__FACILITY___Membe__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="group8Model.FK__MEMBER__Membersh__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="group8Model.FK__REGISTRAT__Membe__3A81B327" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

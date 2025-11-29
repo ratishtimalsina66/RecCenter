@@ -1,0 +1,109 @@
+﻿@model IEnumerable<RecCenter.MEMBER>
+
+@{
+    ViewBag.Title = "Members";
+}
+
+@section PageHeader {
+    <div class="rc-card">
+        <h2 class="rc-card-title">Members</h2>
+        <p>View and manage RecCenter members and their membership types.</p>
+    </div>
+}
+
+<p>
+    @Html.ActionLink(
+        "Add New Member",
+        "Create",
+        null,
+        new { @class = "btn btn-primary" }
+    )
+</p>
+
+<!-- ===== Jump-to-record combo box ===== -->
+<div class="rec-card" style="margin-bottom: 18px;">
+    <div class="row">
+        <div class="col-md-6">
+            <h4 class="rc-card-title">Find a Member</h4>
+            <p style="margin-bottom: 8px;">
+                Select a member and jump straight to their details.
+            </p>
+
+            <select id="memberJump" class="form-control">
+                <option value="">-- Select member --</option>
+                @foreach (var m in Model.OrderBy(x => x.Last_Name).ThenBy(x => x.First_Name))
+                {
+                    <option value="@m.Member_ID">
+                        @m.Last_Name, @m.First_Name (@m.Email)
+                    </option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="rc-card">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.First_Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Last_Name)</th>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <th>@Html.DisplayNameFor(model => model.Phone)</th>
+                <th>@Html.DisplayNameFor(model => model.Date_Of_Birth)</th>
+                <th>@Html.DisplayNameFor(model => model.Join_Date)</th>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                <th>@Html.DisplayNameFor(model => model.City)</th>
+                <th>@Html.DisplayNameFor(model => model.State)</th>
+                <th>@Html.DisplayNameFor(model => model.ZIP_Code)</th>
+                <th>@Html.DisplayNameFor(model => model.Created_Date)</th>
+                <th>@Html.DisplayNameFor(model => model.MEMBERSHIP_TYPE.Type_Name)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.First_Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Last_Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Date_Of_Birth)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Join_Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                    <td>@Html.DisplayFor(modelItem => item.City)</td>
+                    <td>@Html.DisplayFor(modelItem => item.State)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ZIP_Code)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Created_Date)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MEMBERSHIP_TYPE.Type_Name)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Member_ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Member_ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Member_ID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            // Build a safe URL template and replace the id placeholder in JS
+            var urlTemplate = '@Url.Action("Details", "MEMBERs", new { id = "__id__" })';
+
+            $('#memberJump').on('change', function () {
+                var id = $(this).val();
+                if (id) {
+                    var url = urlTemplate.replace('__id__', id);
+                    window.location = url;
+                }
+            });
+        });
+    </script>
+}
