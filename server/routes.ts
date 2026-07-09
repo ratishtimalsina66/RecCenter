@@ -123,7 +123,7 @@ async function seedDatabase() {
     await storage.createProject({
       title: "MedRx Pharmacy Database System",
       description: "A pharmacy management system built with PHP and MySQL, featuring normalized database structures and complex SQL queries for prescription management.",
-      imageUrl: "",
+      imageUrl: "/projects/medrx-pharmacy-prescriptions.png",
       projectUrl: "",
       repoUrl: "",
       tags: ["PHP", "MySQL", "SQL"],
@@ -132,7 +132,7 @@ async function seedDatabase() {
     await storage.createProject({
       title: "Field Journal — Travel Website",
       description: "A responsive multi-page website with interactive galleries, charts, accordions, and dynamic UI features, built with HTML, CSS, and JavaScript.",
-      imageUrl: "",
+      imageUrl: "/projects/field-journal.png",
       projectUrl: "",
       repoUrl: "",
       tags: ["HTML", "CSS", "JavaScript"],
